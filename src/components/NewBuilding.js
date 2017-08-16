@@ -131,9 +131,14 @@ class NewBuilding extends Component {
                 buildings: buildings
                 });
             })
-            .catch(console.log);
+//           .catch(console.log);
+            .catch((err) => {
+                err.response.data.errors.forEach((errorMsg) => {
+                    console.log(errorMsg.defaultMessage);
+                });
+            });
         } else {
-        console.log('Form is not valid!');
+            alert('Form is not valid!');
         }
 
         // Reset the state
