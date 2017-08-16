@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import '../css/bulma.css';
+import axios from 'axios';
 import map from 'lodash/map';
 import BuildingCard from './BuildingCard';
-import '../css/bulma.css';
-
-import axios from 'axios';
+import NewBuilding from './NewBuilding';
 
 const API_URL = 'http://localhost:8080';
 
@@ -32,9 +32,7 @@ class BuildingList extends React.Component {
     const buildings = this.state.buildings;
     return (
       <div>
-        <h2>
-          Current Buildings
-          </h2>
+        <h2>Current Buildings</h2>
         {
           buildings.length === 0
             ? <p>Loading...</p> :
@@ -45,6 +43,7 @@ class BuildingList extends React.Component {
               />
             )))
         }
+        <NewBuilding />
       </div>
     );
   }
