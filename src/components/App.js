@@ -1,35 +1,29 @@
 import React from 'react';
-import PropertyList from './PropertiesList';
-import NewProperty from './NewProperty';
-
-
+import BuildingLIst from './BuildingList';
+// import NewBuilding from './NewBuilding';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.addProperty = this.addProperty.bind(this);
+  constructor (props) {
+    super (props);
+    this.addBuilding = this.addBuilding.bind(this);
   }
-  render() {
+
+  render () {
     return (
       <div className="col-sm-6 col-md-6">
-        {/* <NewProperty
-          addProperty={this.addProperty}
+        {/* <NewBuilding
+          addBuilding={this.addBuilding}
         /> */}
-        <PropertyList
+        <BuildingLIst
         />
       </div >
     );
   }
 
-  addProperty() {
-    const newProperty = Object.assign({}, this.state, {
-      [newPropertyId]: {
-        body: ''
-      }
-    })
-    this.setState({ items: newProperty });
+  addBuilding () {
+    const newBuilding = Object.assign({}, this.state, {body: ''});
+    this.setState({ items: newBuilding });
   }
 }
-
 
 export default App;
