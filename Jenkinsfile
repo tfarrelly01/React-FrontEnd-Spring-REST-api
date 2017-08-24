@@ -17,6 +17,6 @@ node {
    }
 
    stage('Docker Deploy') {
-        sh "docker run -d --name react-frontend -p 81:3000 react-frontend"
+        sh "docker run -d --name react-frontend -p 80:3000 react-frontend"
    }
 }
