@@ -8,20 +8,20 @@ node {
    }
 
    stage('Clean') {
-     sh "mvn -Dmaven.test.failure.ignore clean"
+ //    sh "mvn -Dmaven.test.failure.ignore clean"
    }
 
    stage('Package') {
-     sh "mvn -Dmaven.test.failure.ignore package"
+ //    sh "mvn -Dmaven.test.failure.ignore package"
    }
 
    stage('Docker Build') {
-     sh "docker build -t mybuildings ."
+     sh "docker build -t react-frontend ."
    }
 
    stage('Stop app') {
-     sh "docker stop mybuildings || true"
-     sh "docker rm mybuildings || true"
+     sh "docker stop react-frontend || true"
+     sh "docker rm react-frontend || true"
    }
 
    stage('Docker Deploy') {
