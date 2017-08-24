@@ -5,8 +5,9 @@ import axios from 'axios';
 import map from 'lodash/map';
 import BuildingCard from './BuildingCard';
 import NewBuilding from './NewBuilding';
+import {ROUTE} from '../../config';
 
-const API_URL = 'http://localhost:8080';
+// const API_URL = 'http://localhost:8080';
 
 class BuildingList extends React.Component {
   constructor (props) {
@@ -17,7 +18,7 @@ class BuildingList extends React.Component {
   }
 
   componentDidMount () {
-    axios.get(`${API_URL}/buildings`)
+    axios.get(`${ROUTE}/buildings`)
       .then((res) => {
 
         let buildings = res.data;

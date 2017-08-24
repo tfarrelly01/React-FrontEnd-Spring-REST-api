@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import _ from 'underscore';
+import {ROUTE} from '../../config';
 
-const API_URL = 'http://localhost:8080';
+// const API_URL = 'http://localhost:8080';
 
 function validate (newState) {
   const errors = {};
 
-  if (newState.buildingName.touched) {
+//  if (newState.buildingName.touched) {
     if (!newState.buildingName.value) errors.buildingName = 'Please enter the name of the building.';
     else errors.buildingName = null;
-  }
+ //  }
 
   if (newState.buildingType.touched) {
     if (!newState.buildingType.value) errors.buildingType = 'Please enter the type of building.';
@@ -114,6 +115,7 @@ class NewBuilding extends Component {
 
     handleSubmit (e) {
         e.preventDefault();
+        let errors = {};
         // Check if there are no errors
         if (_.every(this.state.errors, field => field === null)) {
 
@@ -123,42 +125,52 @@ class NewBuilding extends Component {
                 noOfRooms: +this.state.noOfRooms.value,
                 noOfParkingSpaces: +this.state.noOfParkingSpaces.value
             };
-            axios.post(`${API_URL}/buildings/-1`, newBuilding)
+            axios.post(`${ROUTE}/buildings/-1`, newBuilding)
             .then((res) => {
-
-                let buildings = res.data;
-                this.setState({
-                buildings: buildings
-                });
+            console.log('res.config.data' ,res.config.data);
+   //             let buildings = res.config.data;
+  //              this.setState({
+   //                 buildings: buildings
+   //             });
+                console.log('this.state' , this.state);
             })
-//           .catch(console.log);
             .catch((err) => {
                 err.response.data.errors.forEach((errorMsg) => {
                     console.log(errorMsg.defaultMessage);
+                    console.log(errorMsg.field);
+                    console.log('================================================');
+            //        this.setState({errors[errorMsg.field]: errorMsg.defaultMessage});
+                    // check which field the message relates to
+                    // if( errorMsg.fieldName === "buildingType") 
+                    // this.setState(errors.buildingType: errorMsg.defaulMessage)
+
+                    errors[errorMsg.field] = errorMsg.defaultMessage;
                 });
             });
         } else {
             alert('Form is not valid!');
         }
 
+        console.log('errors: ', errors);
+
         // Reset the state
         this.setState({
-        buildingName: {
-            value: '',
-            touched: false
-        },
-        buildingType: {
-            value: '',
-            touched: false
-        },
-        noOfRooms: {
-            value: '',
-            touched: false
-        },
-        noOfParkingSpaces: {
-            name: null,
-            comment: null
-        }
+            buildingName: {
+                value: '',
+                touched: false
+            },
+            buildingType: {
+                value: '',
+                touched: false
+            },
+            noOfRooms: {
+                value: '',
+                touched: false
+            },
+            noOfParkingSpaces: {
+                name: null,
+                comment: null
+            }
         });
     }
  }
